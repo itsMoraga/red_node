@@ -1,0 +1,156 @@
+[
+    {
+        "id": "3680a224d50f45bc",
+        "type": "tab",
+        "label": "Flujo 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "eaf1ae2dcb686c51",
+        "type": "inject",
+        "z": "3680a224d50f45bc",
+        "name": "Temperatura",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"sensor\":\"temp\",\"value\":0}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "d69ce641703209ab"
+            ]
+        ]
+    },
+    {
+        "id": "d69ce641703209ab",
+        "type": "function",
+        "z": "3680a224d50f45bc",
+        "name": "Generar Temperatura",
+        "func": "msg.payload.value = (20 + Math.random() * 5).toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 100,
+        "wires": [
+            [
+                "1773944ca4834250"
+            ]
+        ]
+    },
+    {
+        "id": "1773944ca4834250",
+        "type": "websocket out",
+        "z": "3680a224d50f45bc",
+        "name": "Enviar a WebSocket Node.js",
+        "server": "",
+        "client": "4fd4cb24d217d744",
+        "x": 710,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "2bb8498131bf7132",
+        "type": "inject",
+        "z": "3680a224d50f45bc",
+        "name": "Humedad",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "7",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"sensor\":\"hum\",\"value\":0}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "33c0c430cc1f21a0"
+            ]
+        ]
+    },
+    {
+        "id": "33c0c430cc1f21a0",
+        "type": "function",
+        "z": "3680a224d50f45bc",
+        "name": "Generar Humedad",
+        "func": "msg.payload.value = (40 + Math.random() * 10).toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [
+                "1773944ca4834250"
+            ]
+        ]
+    },
+    {
+        "id": "7d1820eb84ac4e9a",
+        "type": "websocket in",
+        "z": "3680a224d50f45bc",
+        "name": "Escuchar comandos del servidor",
+        "server": "",
+        "client": "ws-server",
+        "x": 230,
+        "y": 310,
+        "wires": [
+            [
+                "232bc5b976aae32b"
+            ]
+        ]
+    },
+    {
+        "id": "232bc5b976aae32b",
+        "type": "debug",
+        "z": "3680a224d50f45bc",
+        "name": "Comandos recibidos",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 310,
+        "wires": []
+    },
+    {
+        "id": "4fd4cb24d217d744",
+        "type": "websocket-client",
+        "path": "ws://localhost:3000/ws",
+        "tls": "",
+        "wholemsg": "false",
+        "hb": "0",
+        "subprotocol": "",
+        "headers": []
+    },
+    {
+        "id": "ws-server",
+        "type": "websocket-listener",
+        "path": "ws://localhost:3000",
+        "wholemsg": "false"
+    }
+]
