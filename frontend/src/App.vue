@@ -76,7 +76,7 @@ onUnmounted(() => { if (ws) ws.close() })
     <main class="content">
       <div class="sensor-grid">
         <div class="sensor-card temperature">
-          <div class="sensor-icon">🌡️</div>
+          <div class="sensor-icon"></div>
           <div class="sensor-info">
             <h2>Temperatura</h2>
             <div class="sensor-value">{{ temperature.toFixed(2) }} <span class="unit">°C</span></div>
@@ -84,7 +84,7 @@ onUnmounted(() => { if (ws) ws.close() })
         </div>
 
         <div class="sensor-card humidity">
-          <div class="sensor-icon">💧</div>
+          <div class="sensor-icon"></div>
           <div class="sensor-info">
             <h2>Humedad</h2>
             <div class="sensor-value">{{ humidity.toFixed(2) }} <span class="unit">%</span></div>
@@ -93,7 +93,7 @@ onUnmounted(() => { if (ws) ws.close() })
       </div>
 
       <div class="history-section full-height">
-        <h2>📊 Lecturas Recientes</h2>
+        <h2>Lecturas Recientes</h2>
         <div class="history-list">
           <div v-if="sensorHistory.length === 0" class="no-data">Esperando datos de los sensores...</div>
           <div v-for="(item, index) in sensorHistory" :key="index" class="history-item">
